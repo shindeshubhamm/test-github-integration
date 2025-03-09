@@ -22,12 +22,12 @@ external_node_modules = [
     "mime-types",
 ]
 
-# [[redirects]]
-# from = "/github/*"
-# to = "/.netlify/functions/server/:splat"
-# status = 200
+[[redirects]]
+from = "/github/*"
+to = "/.netlify/functions/server/:splat"
+status = 200
 
-# [[redirects]]
-# from = "/*"
-# to = "/.netlify/functions/server/:splat"
-# status = 200
+[[redirects]]
+from = "/*"
+to = "/.netlify/functions/server/:splat"
+status = 200
