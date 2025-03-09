@@ -1,3 +1,5 @@
+import { Handler } from "@netlify/functions";
+import serverless from "serverless-http";
 import express, { Application, Request, Response, NextFunction } from "express";
 import githubRoutes from "./routes/github.routes";
 
@@ -21,4 +23,23 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(500).json({ error: "Something went wrong!" });
 });
 
+// export app for local development
 export default app;
+
+// export handler for netlify functions
+export const handler: Handler = async (event, context) => {
+  const serverlessHandler = serverless(app);
+  try {
+    const response = await serverlessHandler(event, context);
+    return response as {
+      statusCode: number;
+      headers: { [key: string]: string | number | boolean };
+      body: string;
+    };
+  } catch (error: any) {
+    return {
+      statusCode: error.statusCode || 500,
+      body: JSON.stringify({ error: error.message || "Internal server error" }),
+    };
+  }
+};
