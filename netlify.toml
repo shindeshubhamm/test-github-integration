@@ -23,11 +23,6 @@ external_node_modules = [
 ]
 
 [[redirects]]
-from = "/github/*"
-to = "/.netlify/functions/server/:splat"
-status = 200
-
-[[redirects]]
 from = "/*"
-to = "/.netlify/functions/server/:splat"
+to = "/.netlify/functions/index/:splat"
 status = 200

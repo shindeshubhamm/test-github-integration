@@ -1,7 +1,14 @@
-import app from "./src/server";
+import { handler } from "./src/server";
 
-const port: string | number = process.env.PORT || 3000;
+// export the handler for Netlify Functions
+export { handler };
 
-app.listen(port, () => {
-  console.log(`> server started on port ${port}`);
-});
+// for local development
+if (process.env.NODE_ENV !== "production") {
+  const app = require("./src/server").default;
+  const port: string | number = process.env.PORT || 3000;
+
+  app.listen(port, () => {
+    console.log(`> server started on port ${port}`);
+  });
+}
