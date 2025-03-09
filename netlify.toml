@@ -1,3 +1,33 @@
 [build]
 command = "pnpm build"
 functions = "dist"
+publish = "dist"
+
+[functions]
+node_bundler = "esbuild"
+external_node_modules = [
+    "express",
+    "accepts",
+    "body-parser",
+    "type-is",
+    "content-type",
+    "cookie",
+    "qs",
+    "raw-body",
+    "bytes",
+    "http-errors",
+    "iconv-lite",
+    "unpipe",
+    "media-typer",
+    "mime-types",
+]
+
+[[redirects]]
+from = "/github/*"
+to = "/.netlify/functions/server/:splat"
+status = 200
+
+[[redirects]]
+from = "/*"
+to = "/.netlify/functions/server/:splat"
+status = 200
