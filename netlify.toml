@@ -1,26 +1,11 @@
 [build]
-command = "pnpm build"
+command = "pnpm install && pnpm build"
 functions = "dist"
 publish = "dist"
 
 [functions]
 node_bundler = "esbuild"
-external_node_modules = [
-    "express",
-    "accepts",
-    "body-parser",
-    "type-is",
-    "content-type",
-    "cookie",
-    "qs",
-    "raw-body",
-    "bytes",
-    "http-errors",
-    "iconv-lite",
-    "unpipe",
-    "media-typer",
-    "mime-types",
-]
+included_files = ["dist/**/*", "src/**/*"]
 
 [[redirects]]
 from = "/*"
