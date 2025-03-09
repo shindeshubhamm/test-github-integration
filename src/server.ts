@@ -27,19 +27,4 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 export default app;
 
 // export handler for netlify functions
-export const handler: Handler = async (event, context) => {
-  const serverlessHandler = serverless(app);
-  try {
-    const response = await serverlessHandler(event, context);
-    return response as {
-      statusCode: number;
-      headers: { [key: string]: string | number | boolean };
-      body: string;
-    };
-  } catch (error: any) {
-    return {
-      statusCode: error.statusCode || 500,
-      body: JSON.stringify({ error: error.message || "Internal server error" }),
-    };
-  }
-};
+export const handler = serverless(app);
