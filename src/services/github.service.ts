@@ -26,6 +26,7 @@ export const getUserProfile = async () => {
   return {
     profile: {
       name: user.name,
+      username: username,
       bio: user.bio,
       company: user.company,
       blog: user.blog,
@@ -82,11 +83,14 @@ export const getRepository = async (repoName: string) => {
     issues: repo.open_issues_count,
     created_at: repo.created_at,
     updated_at: repo.updated_at,
-    contributors: contributors.map((contributor: RepositoryContributor) => ({
-      username: contributor.login,
-      avatar: contributor.avatar_url,
-      contributions: contributor.contributions,
-    })),
+    contributors:
+      contributors?.length > 0
+        ? contributors.map((contributor: RepositoryContributor) => ({
+            username: contributor.login,
+            avatar: contributor.avatar_url,
+            contributions: contributor.contributions,
+          }))
+        : [],
   };
 };
 
